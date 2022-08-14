@@ -14,7 +14,7 @@
   },
   "CONFIGURE_URL": {
     "ENTER_URL": "Installatie url",
-    "DESCRIPTION": "If you are using a self-hosted Chatwoot installation, input your server URL. Otherwise, use app.chatwoot.com.",
+    "DESCRIPTION": "If you are using a self-hosted BiteSpeed installation, input your server URL. Otherwise, use chat.bitespeed.co.",
     "URL_ERROR": "Voer een geldige URL in",
     "URL_REQUIRED": "URL is required",
     "CONNECT": "Koppelen",

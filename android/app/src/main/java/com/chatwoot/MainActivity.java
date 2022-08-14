@@ -1,4 +1,4 @@
-package com.chatwoot.app;
+package com.bitespeed.app;
 
 import com.facebook.react.ReactActivity;
 

@@ -268,6 +268,7 @@
 				5B7BE4557BEA652A4E7694F7 /* [CP-User] [RNFB] Core Configuration */,
 				68972FD48F9A4106ABFB7160 /* Upload Debug Symbols to Sentry */,
 				B66079D4829A4E919D196FF2 /* Upload Debug Symbols to Sentry */,
+				E138E4B191AB49DBADA7D785 /* Upload Debug Symbols to Sentry */,
 			);
 			buildRules = (
 			);
@@ -565,6 +566,20 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Chatwoot/Pods-Chatwoot-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E138E4B191AB49DBADA7D785 /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Debug Symbols to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
+		};
 		F2805A5DABF18531D22B8EC3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -738,7 +753,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e78c29ed-7256-452f-9469-dce6dad389bc";
-				PROVISIONING_PROFILE_SPECIFIER = "com.chatwoot.app AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "com.bitespeed.app AppStore";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chatwoot.app/Chatwoot";
 			};
 			name = Release;
@@ -766,7 +781,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chatwoot.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitespeed.app;
 				PRODUCT_NAME = Chatwoot;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -799,7 +814,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chatwoot.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bitespeed.app;
 				PRODUCT_NAME = Chatwoot;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -864,7 +879,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Chatwoot-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e78c29ed-7256-452f-9469-dce6dad389bc";
-				PROVISIONING_PROFILE_SPECIFIER = "com.chatwoot.app AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "com.bitespeed.app AppStore";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
@@ -922,7 +937,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.Chatwoot-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "e78c29ed-7256-452f-9469-dce6dad389bc";
-				PROVISIONING_PROFILE_SPECIFIER = "com.chatwoot.app AppStore";
+				PROVISIONING_PROFILE_SPECIFIER = "com.bitespeed.app AppStore";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chatwoot-tvOS.app/Chatwoot-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;

@@ -133,7 +133,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.chatwoot.app"
+        applicationId "com.bitespeed.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5033
