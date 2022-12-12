@@ -51,6 +51,7 @@
   },
   "CONVERSATION": {
     "DEFAULT_HEADER_TITLE": "שיחות",
+    "UPDATING": "Updating...",
     "MINE": "שלי",
     "UN_ASSIGNED": "לא הוקצתה",
     "ALL": "הכל",
@@ -70,9 +71,14 @@
     "PRIVATE_MSG_INPUT": "זה יהיה גלוי רק לסוכנים",
     "UN_ASSIGN": "שיחה שלא הוקצתה",
     "MUTE_CONVERSATION": "Mute conversation",
-    "UNMUTE_CONVERSATION": "בטל השתקת שיחה"
+    "UNMUTE_CONVERSATION": "בטל השתקת שיחה",
+    "CONVERSATION_NOT_FOUND": "Could not fetch conversation"
   },
   "FILTER": {
+    "ALL_INBOXES": "All inboxes",
+    "FILTER_BY_ASSIGNEE_TYPE": "Filter by assignee type",
+    "FILTER_BY_CONVERSATION_STATUS": "Filter by conversation status",
+    "FILTER_BY_INBOX": "Filter by inbox",
     "HEADER_TITLE": "סינון שיחות",
     "CHOOSE_INBOX": "בחר בתיבת דואר נכנס",
     "CHOOSE_STATUS": "סטטוס שיחה",
@@ -120,17 +126,33 @@
     "CONVERSATION_ASSIGNED_NEW_MESSAGE_EMAIL": "שלח התראה באימייל כאשר יש הודעה חדשה בשיחה המוקצית עבורי"
   },
   "CONVERSATION_DETAILS": {
+    "TITLE": "Conversation Information",
     "BROWSER": "דפדפן",
     "OPERATING_SYSTEM": "מערכת הפעלה",
     "INITIATED_AT": "יזם ב",
     "INITIATED_FROM": "יזם מ",
     "IP_ADDRESS": "כתובת IP"
   },
+  "CONTACT_ATTRIBUTES": {
+    "TITLE": "Contact Attributes"
+  },
   "CONVERSATION_ACTION": {
     "TITLE": "פעולות"
   },
+  "CONVERSATION_LABELS": {
+    "TITLE": "תוויות שיחה",
+    "ADD_LABEL": "הוסף תוויות",
+    "EMPTY_LIST": "Please add labels to your account",
+    "NO_LABEL": "No labels assigned",
+    "UPDATE_LABEL": "Label updated successfully"
+  },
   "AGENT": {
     "TITLE": "בחר סוכן"
+  },
+  "TEAMS": {
+    "TITLE": "Select Team",
+    "EMPTY": "Please add teams to your account to assign conversations to teams.",
+    "CHANGE_TEAMS": "שיחת קבוצה השתנתה"
   },
   "ERRORS": {
     "COMMON_ERROR": "לא ניתן להתחבר לשרת Woot, נסה שוב מאוחר יותר",

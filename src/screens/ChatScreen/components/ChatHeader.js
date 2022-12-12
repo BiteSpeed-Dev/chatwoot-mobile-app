@@ -10,8 +10,7 @@ import ActionSheet from 'react-native-actions-sheet';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { TouchableOpacity, View } from 'react-native';
-import UserAvatar from 'components/UserAvatar';
+import { View } from 'react-native';
 import { getTypingUsersText, getCustomerDetails } from 'helpers';
 import CustomText from 'components/Text';
 import {
@@ -20,6 +19,7 @@ import {
   muteConversation,
   unmuteConversation,
 } from 'actions/conversation';
+import { UserAvatar, Pressable } from 'components';
 import { getInboxName } from 'helpers';
 import ConversationAction from '../../ConversationAction/ConversationAction';
 import { captureEvent } from '../../../helpers/Analytics';
@@ -39,7 +39,11 @@ const styles = theme => ({
     marginHorizontal: 4,
   },
   titleView: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
     marginHorizontal: 8,
+    height: 34,
   },
   headerTitle: {
     textTransform: 'capitalize',
@@ -59,8 +63,11 @@ const styles = theme => ({
   },
   inboxNameTypingWrap: {
     flexDirection: 'row',
-    marginLeft: 4,
+    alignItems: 'center',
+  },
+  inboxNameWrap: {
     marginTop: 2,
+    marginLeft: 4,
   },
 });
 
@@ -104,8 +111,16 @@ const ChatHeader = ({
 
   const inboxes = useSelector(state => state.inbox.data);
   const inboxId = conversationDetails && conversationDetails.inbox_id;
+  const inboxDetails = inboxes ? inboxes.find(inbox => inbox.id === inboxId) : {};
   const channelType =
     conversationDetails && conversationDetails.meta && conversationDetails.meta.channel;
+
+  const {
+    meta: {
+      sender: { availability_status: availabilityStatus },
+    },
+    additional_attributes: additionalAttributes = {},
+  } = conversationDetails;
 
   const conversation = useSelector(state => state.conversation);
   const { isChangingConversationStatus } = conversation;
@@ -224,19 +239,17 @@ const ChatHeader = ({
       <TopNavigation
         style={style.chatHeader}
         title={() => (
-          <TouchableOpacity
-            style={style.headerView}
-            onPress={showConversationDetails}
-            activeOpacity={0.5}>
+          <Pressable style={style.headerView} onPress={showConversationDetails}>
             {customerDetails.name && (
               <UserAvatar
-                style={style.avatarView}
-                userName={customerDetails.name}
-                size={40}
-                fontSize={14}
                 thumbnail={customerDetails.thumbnail}
-                defaultBGColor={theme['color-primary-default']}
+                userName={customerDetails.name}
+                size={42}
+                fontSize={14}
                 channel={customerDetails.channel}
+                inboxInfo={inboxDetails}
+                chatAdditionalInfo={additionalAttributes}
+                availabilityStatus={availabilityStatus !== 'offline' ? availabilityStatus : ''}
               />
             )}
 
@@ -251,13 +264,18 @@ const ChatHeader = ({
                 )}
               </View>
               <View style={style.inboxNameTypingWrap}>
-                {conversationDetails && (
-                  <InboxName iconName={iconName} inboxName={inboxName} size={'small'} />
+                {typingUser ? (
+                  <TypingStatus typingUser={typingUser} />
+                ) : (
+                  <View style={style.inboxNameWrap}>
+                    {conversationDetails && (
+                      <InboxName iconName={iconName} inboxName={inboxName} size={'small'} />
+                    )}
+                  </View>
                 )}
-                {typingUser ? <TypingStatus typingUser={typingUser} /> : null}
               </View>
             </View>
-          </TouchableOpacity>
+          </Pressable>
         )}
         accessoryLeft={renderLeftControl}
         accessoryRight={renderRightControl}

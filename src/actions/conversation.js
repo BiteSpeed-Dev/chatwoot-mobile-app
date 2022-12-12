@@ -21,9 +21,6 @@ import {
   MARK_MESSAGES_AS_READ_SUCCESS,
   MARK_MESSAGES_AS_READ_ERROR,
   SET_CONVERSATION,
-  GET_CANNED_RESPONSES,
-  GET_CANNED_RESPONSES_SUCCESS,
-  GET_CANNED_RESPONSES_ERROR,
   SET_CONVERSATION_DETAILS,
   RESET_CONVERSATION,
   ADD_OR_UPDATE_USER_TYPING_IN_CONVERSATION,
@@ -99,9 +96,7 @@ export const getConversations =
         });
       }
     } catch (error) {
-      const {
-        response: { status },
-      } = error;
+      const { response: { status = null } = {} } = error;
 
       if (status === 401) {
         dispatch(onLogOut());
@@ -325,29 +320,31 @@ export const getConversationDetails =
 // Send message
 export const sendMessage = payload => async dispatch => {
   const { conversationId, message, isPrivate = false, file } = payload;
-
   dispatch({ type: SEND_MESSAGE });
   try {
-    const formData = new FormData();
+    let formData;
     if (file) {
+      formData = new FormData();
+      if (message) {
+        formData.append('content', message.content);
+      }
       formData.append('attachments[]', {
         uri: file.uri,
         name: file.fileName,
         type: file.type,
       });
+      formData.append('private', isPrivate);
+      formData.append('cc_emails', message.cc_emails);
+      formData.append('bcc_emails', message.bcc_emails);
+    } else {
+      formData = {
+        content: message.content,
+        private: isPrivate,
+        cc_emails: message.cc_emails,
+        bcc_emails: message.bcc_emails,
+      };
     }
-    if (message) {
-      if (message.content) {
-        formData.append('content', message.content);
-      }
-      if (message.cc_emails) {
-        formData.append('cc_emails', message.cc_emails);
-      }
-      if (message.bcc_emails) {
-        formData.append('bcc_emails', message.bcc_emails);
-      }
-    }
-    formData.append('private', isPrivate);
+
     const apiUrl = `conversations/${conversationId}/messages`;
     const response = await axios.post(apiUrl, formData);
     dispatch({
@@ -387,27 +384,6 @@ export const markMessagesAsRead =
       dispatch({ type: MARK_MESSAGES_AS_READ_ERROR, payload: error });
     }
   };
-export const loadCannedResponses = () => async dispatch => {
-  dispatch({ type: GET_CANNED_RESPONSES });
-
-  try {
-    const response = await axios.get('canned_responses');
-
-    const { data } = response;
-
-    const payload = data.map(item => ({
-      ...item,
-      title: `${item.short_code} - ${item.content.substring(0, 40)}`,
-    }));
-
-    dispatch({
-      type: GET_CANNED_RESPONSES_SUCCESS,
-      payload,
-    });
-  } catch (error) {
-    dispatch({ type: GET_CANNED_RESPONSES_ERROR, payload: error });
-  }
-};
 
 export const resetConversation = () => async dispatch => {
   dispatch({ type: RESET_CONVERSATION });

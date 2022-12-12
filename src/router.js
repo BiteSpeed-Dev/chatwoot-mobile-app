@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Linking, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+
 import PropTypes from 'prop-types';
+import { LightTheme } from 'src/theme.v2';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ConfigureURLScreen from './screens/ConfigureURLScreen/ConfigureURLScreen';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
 import TabBar from './components/TabBar';
-import ConversationList from './screens/ConversationList/ConversationList';
+import ConversationScreen from './screens/Conversation/ConversationScreen';
 import NotificationScreen from './screens/Notification/NotificationScreen';
 import SettingsScreen from './screens/Settings/SettingsScreen';
 import LanguageScreen from './screens/Language/LanguageScreen';
@@ -24,25 +27,26 @@ import ConversationDetailsScreen from './screens/ConversationDetails/Conversatio
 import ConversationAction from './screens/ConversationAction/ConversationAction';
 import AgentScreen from './screens/AgentScreen/AgentScreen';
 import LabelScreen from './screens/LabelScreen/LabelScreen';
-
-import i18n from './i18n';
-import { navigationRef } from './helpers/NavigationHelper';
-import { handlePush } from './helpers/PushHelper';
-
-import { doDeepLinking } from './helpers/DeepLinking';
-import { resetConversation, getConversations } from './actions/conversation';
+import TeamScreen from 'screens/TeamScreen/TeamScreen';
+import i18n from 'i18n';
+import { navigationRef } from 'helpers/NavigationHelper';
+import { handlePush } from 'helpers/PushHelper';
+import { doDeepLinking } from 'helpers/DeepLinking';
 import { withStyles } from '@ui-kitten/components';
-import { captureScreen } from './helpers/Analytics';
-import TeamScreen from './screens/TeamScreen/TeamScreen';
+import { captureScreen } from 'helpers/Analytics';
+import conversationActions from 'reducer/conversationSlice.action';
+import {
+  selectConversationStatus,
+  selectAssigneeType,
+  selectActiveInbox,
+} from 'reducer/conversationSlice';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-messaging().setBackgroundMessageHandler(async remoteMessage => {});
-
 const HomeStack = () => (
-  <Stack.Navigator initialRouteName="ConversationList" screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="ConversationList" component={ConversationList} />
+  <Stack.Navigator initialRouteName="ConversationScreen" screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="ConversationScreen" component={ConversationScreen} />
   </Stack.Navigator>
 );
 
@@ -65,6 +69,8 @@ const TabStack = () => (
     <Tab.Screen name="SettingsTab" component={SettingsStack} />
   </Tab.Navigator>
 );
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {});
 
 const propTypes = {
   isLoggedIn: PropTypes.bool,
@@ -120,11 +126,17 @@ const _handleOpenURL = event => {
 };
 
 const App = ({ eva: { style } }) => {
+  // TODO: Lets use light theme for now, add dark theme later
+  const theme = LightTheme;
+
   const dispatch = useDispatch();
   const routeNameRef = useRef();
 
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const isUrlSet = useSelector(state => state.settings.isUrlSet);
+  const conversationStatus = useSelector(selectConversationStatus);
+  const assigneeType = useSelector(selectAssigneeType);
+  const activeInboxId = useSelector(selectActiveInbox);
 
   const locale = useSelector(state => state.settings.localeValue);
   const { linkedURL, resetURL } = useDeepLinkURL();
@@ -134,7 +146,6 @@ const App = ({ eva: { style } }) => {
   }, [linkedURL, resetURL]);
 
   useEffect(() => {
-    dispatch(resetConversation());
     // Notification caused app to open from foreground state
     messaging().onMessage(remoteMessage => {
       // handlePush({ remoteMessage, type: 'foreground' });
@@ -150,18 +161,22 @@ const App = ({ eva: { style } }) => {
       .then(remoteMessage => {
         if (remoteMessage) {
           handlePush({ remoteMessage, type: 'quite' });
-          setTimeout(() => {
-            dispatch(getConversations({ assigneeType: 0 }));
-          }, 500);
+          dispatch(
+            conversationActions.fetchConversations({
+              assigneeType,
+              conversationStatus,
+              activeInboxId,
+            }),
+          );
         }
       });
-  }, [dispatch]);
+  }, [activeInboxId, assigneeType, conversationStatus, dispatch]);
 
   if (linkedURL) {
     _handleOpenURL({ url: linkedURL });
   }
-
   i18n.locale = locale;
+
   return (
     <KeyboardAvoidingView
       style={style.container}
@@ -179,36 +194,39 @@ const App = ({ eva: { style } }) => {
             }
             // Save the current route name for later comparison
             routeNameRef.current = currentRouteName;
-          }}>
-          <Stack.Navigator
-            initialRouteName={isUrlSet ? 'Login' : 'ConfigureURL'}
-            screenOptions={{ headerShown: false }}>
-            {isLoggedIn ? (
-              <Fragment>
-                <Stack.Screen name="Tab" component={TabStack} />
-                <Stack.Screen name="ChatScreen" component={ChatScreen} />
-                <Stack.Screen name="ConversationFilter" component={ConversationFilter} />
-                <Stack.Screen name="ImageScreen" component={ImageScreen} />
-                <Stack.Screen name="Language" component={LanguageScreen} />
-                <Stack.Screen name="Account" component={AccountScreen} />
-                <Stack.Screen name="ConversationDetails" component={ConversationDetailsScreen} />
-                <Stack.Screen name="ConversationAction" component={ConversationAction} />
-                <Stack.Screen name="AgentScreen" component={AgentScreen} />
-                <Stack.Screen name="LabelScreen" component={LabelScreen} />
-                <Stack.Screen name="TeamScreen" component={TeamScreen} />
-                <Stack.Screen name="Availability" component={AvailabilityScreen} />
-                <Stack.Screen name="NotificationPreference" component={NotificationPreference} />
-              </Fragment>
-            ) : (
-              <Fragment>
-                <Stack.Screen name="ConfigureURL" component={ConfigureURLScreen} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="ResetPassword" component={ResetPassword} />
-                <Stack.Screen name="ConversationList" component={ConversationList} />
-                <Stack.Screen name="Language" component={LanguageScreen} />
-              </Fragment>
-            )}
-          </Stack.Navigator>
+          }}
+          theme={theme}>
+          <BottomSheetModalProvider>
+            <Stack.Navigator
+              initialRouteName={isUrlSet ? 'Login' : 'ConfigureURL'}
+              screenOptions={{ headerShown: false }}>
+              {isLoggedIn ? (
+                <Fragment>
+                  <Stack.Screen name="Tab" component={TabStack} />
+                  <Stack.Screen name="ChatScreen" component={ChatScreen} />
+                  <Stack.Screen name="ConversationFilter" component={ConversationFilter} />
+                  <Stack.Screen name="ImageScreen" component={ImageScreen} />
+                  <Stack.Screen name="Language" component={LanguageScreen} />
+                  <Stack.Screen name="Account" component={AccountScreen} />
+                  <Stack.Screen name="ConversationDetails" component={ConversationDetailsScreen} />
+                  <Stack.Screen name="ConversationAction" component={ConversationAction} />
+                  <Stack.Screen name="AgentScreen" component={AgentScreen} />
+                  <Stack.Screen name="LabelScreen" component={LabelScreen} />
+                  <Stack.Screen name="TeamScreen" component={TeamScreen} />
+                  <Stack.Screen name="Availability" component={AvailabilityScreen} />
+                  <Stack.Screen name="NotificationPreference" component={NotificationPreference} />
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <Stack.Screen name="ConfigureURL" component={ConfigureURLScreen} />
+                  <Stack.Screen name="Login" component={LoginScreen} />
+                  <Stack.Screen name="ResetPassword" component={ResetPassword} />
+                  <Stack.Screen name="ConversationScreen" component={ConversationScreen} />
+                  <Stack.Screen name="Language" component={LanguageScreen} />
+                </Fragment>
+              )}
+            </Stack.Navigator>
+          </BottomSheetModalProvider>
         </NavigationContainer>
       </SafeAreaView>
     </KeyboardAvoidingView>

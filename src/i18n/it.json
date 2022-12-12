@@ -51,6 +51,7 @@
   },
   "CONVERSATION": {
     "DEFAULT_HEADER_TITLE": "Conversazioni",
+    "UPDATING": "Updating...",
     "MINE": "Mie",
     "UN_ASSIGNED": "Non assegnato",
     "ALL": "Tutti",
@@ -70,9 +71,14 @@
     "PRIVATE_MSG_INPUT": "Questo sarà visibile solo agli agenti",
     "UN_ASSIGN": "Annulla l'assegnazione della conversazione",
     "MUTE_CONVERSATION": "Silenzia conversazione",
-    "UNMUTE_CONVERSATION": "Riattiva conversazione"
+    "UNMUTE_CONVERSATION": "Riattiva conversazione",
+    "CONVERSATION_NOT_FOUND": "Could not fetch conversation"
   },
   "FILTER": {
+    "ALL_INBOXES": "All inboxes",
+    "FILTER_BY_ASSIGNEE_TYPE": "Filter by assignee type",
+    "FILTER_BY_CONVERSATION_STATUS": "Filter by conversation status",
+    "FILTER_BY_INBOX": "Filter by inbox",
     "HEADER_TITLE": "Filtro conversazione",
     "CHOOSE_INBOX": "Scegli Posta in arrivo",
     "CHOOSE_STATUS": "Stato della conversazione",
@@ -120,17 +126,33 @@
     "CONVERSATION_ASSIGNED_NEW_MESSAGE_EMAIL": "Invia notifiche email quando viene creato un nuovo messaggio in una conversazione assegnata"
   },
   "CONVERSATION_DETAILS": {
+    "TITLE": "Informazioni conversazione",
     "BROWSER": "Browser",
     "OPERATING_SYSTEM": "Sistema operativo",
     "INITIATED_AT": "Avviato il",
     "INITIATED_FROM": "Avviato da",
     "IP_ADDRESS": "Indirizzo IP"
   },
+  "CONTACT_ATTRIBUTES": {
+    "TITLE": "Attributi contatti"
+  },
   "CONVERSATION_ACTION": {
     "TITLE": "Azioni"
   },
+  "CONVERSATION_LABELS": {
+    "TITLE": "Etichette conversazione",
+    "ADD_LABEL": "Aggiungi etichette",
+    "EMPTY_LIST": "Si prega di aggiungere le etichette al tuo account",
+    "NO_LABEL": "Nessuna etichetta assegnata",
+    "UPDATE_LABEL": "Etichetta aggiornata con successo"
+  },
   "AGENT": {
     "TITLE": "Seleziona agente"
+  },
+  "TEAMS": {
+    "TITLE": "Seleziona team",
+    "EMPTY": "Aggiungi dei team al tuo account per assegnare conversazioni ai team.",
+    "CHANGE_TEAMS": "Team conversazione cambiato"
   },
   "ERRORS": {
     "COMMON_ERROR": "Impossibile connettersi al server Woot, riprova più tardi",

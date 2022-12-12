@@ -51,6 +51,7 @@
   },
   "CONVERSATION": {
     "DEFAULT_HEADER_TITLE": "Konverzace",
+    "UPDATING": "Updating...",
     "MINE": "Mine",
     "UN_ASSIGNED": "Unassigned",
     "ALL": "All",
@@ -70,9 +71,14 @@
     "PRIVATE_MSG_INPUT": "This will be visible only to Agents",
     "UN_ASSIGN": "Unassign conversation",
     "MUTE_CONVERSATION": "Mute conversation",
-    "UNMUTE_CONVERSATION": "Unmute conversation"
+    "UNMUTE_CONVERSATION": "Unmute conversation",
+    "CONVERSATION_NOT_FOUND": "Could not fetch conversation"
   },
   "FILTER": {
+    "ALL_INBOXES": "All inboxes",
+    "FILTER_BY_ASSIGNEE_TYPE": "Filter by assignee type",
+    "FILTER_BY_CONVERSATION_STATUS": "Filter by conversation status",
+    "FILTER_BY_INBOX": "Filter by inbox",
     "HEADER_TITLE": "Conversation Filter",
     "CHOOSE_INBOX": "Choose Inbox",
     "CHOOSE_STATUS": "Conversation Status",
@@ -120,17 +126,33 @@
     "CONVERSATION_ASSIGNED_NEW_MESSAGE_EMAIL": "Odeslat oznámení e-mailem, když je nová zpráva vytvořena v přiřazené konverzaci"
   },
   "CONVERSATION_DETAILS": {
+    "TITLE": "Informace o konverzaci",
     "BROWSER": "Browser",
     "OPERATING_SYSTEM": "Operating System",
     "INITIATED_AT": "Initiated at",
     "INITIATED_FROM": "Initiated from",
     "IP_ADDRESS": "IP adresa"
   },
+  "CONTACT_ATTRIBUTES": {
+    "TITLE": "Atributy kontaktu"
+  },
   "CONVERSATION_ACTION": {
     "TITLE": "Actions"
   },
+  "CONVERSATION_LABELS": {
+    "TITLE": "Štítky konverzace",
+    "ADD_LABEL": "Add Labels",
+    "EMPTY_LIST": "Please add labels to your account",
+    "NO_LABEL": "No labels assigned",
+    "UPDATE_LABEL": "Label updated successfully"
+  },
   "AGENT": {
     "TITLE": "Vybrat agenta"
+  },
+  "TEAMS": {
+    "TITLE": "Select Team",
+    "EMPTY": "Please add teams to your account to assign conversations to teams.",
+    "CHANGE_TEAMS": "Tým konverzace se změnil"
   },
   "ERRORS": {
     "COMMON_ERROR": "Nelze se připojit k Woot serveru, opakujte akci později",

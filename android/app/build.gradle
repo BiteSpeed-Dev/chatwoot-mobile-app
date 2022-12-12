@@ -136,8 +136,8 @@ android {
         applicationId "com.bitespeed.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5033
-        versionName "1.4.6"
+        versionCode 5072
+        versionName "1.7.9"
         multiDexEnabled true 
     }
     splits {

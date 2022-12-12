@@ -51,6 +51,7 @@
   },
   "CONVERSATION": {
     "DEFAULT_HEADER_TITLE": "Conversas",
+    "UPDATING": "Updating...",
     "MINE": "Minerar",
     "UN_ASSIGNED": "Não atribuído",
     "ALL": "TODOS",
@@ -70,9 +71,14 @@
     "PRIVATE_MSG_INPUT": "This will be visible only to Agents",
     "UN_ASSIGN": "Unassign conversation",
     "MUTE_CONVERSATION": "Silenciar Conversa",
-    "UNMUTE_CONVERSATION": "Reativar conversa"
+    "UNMUTE_CONVERSATION": "Reativar conversa",
+    "CONVERSATION_NOT_FOUND": "Could not fetch conversation"
   },
   "FILTER": {
+    "ALL_INBOXES": "All inboxes",
+    "FILTER_BY_ASSIGNEE_TYPE": "Filter by assignee type",
+    "FILTER_BY_CONVERSATION_STATUS": "Filter by conversation status",
+    "FILTER_BY_INBOX": "Filter by inbox",
     "HEADER_TITLE": "Conversation Filter",
     "CHOOSE_INBOX": "Choose Inbox",
     "CHOOSE_STATUS": "Conversation Status",
@@ -120,17 +126,33 @@
     "CONVERSATION_ASSIGNED_NEW_MESSAGE_EMAIL": "Send email notifications when a new message is created in an assigned conversation"
   },
   "CONVERSATION_DETAILS": {
+    "TITLE": "Conversation Information",
     "BROWSER": "Navegador",
     "OPERATING_SYSTEM": "Sistema operacional",
     "INITIATED_AT": "Iniciado em",
     "INITIATED_FROM": "Initiated from",
     "IP_ADDRESS": "Endereço IP"
   },
+  "CONTACT_ATTRIBUTES": {
+    "TITLE": "Atributos do Contato"
+  },
   "CONVERSATION_ACTION": {
     "TITLE": "Ações."
   },
+  "CONVERSATION_LABELS": {
+    "TITLE": "Etiquetas da conversa",
+    "ADD_LABEL": "Adicionar Etiquetas",
+    "EMPTY_LIST": "Please add labels to your account",
+    "NO_LABEL": "No labels assigned",
+    "UPDATE_LABEL": "Etiqueta adicionada com sucesso"
+  },
   "AGENT": {
     "TITLE": "Select Agent"
+  },
+  "TEAMS": {
+    "TITLE": "Escolher Equipa",
+    "EMPTY": "Please add teams to your account to assign conversations to teams.",
+    "CHANGE_TEAMS": "Equipa de conversação alterada"
   },
   "ERRORS": {
     "COMMON_ERROR": "Não foi possível conectar ao servidor Woot, por favor tente novamente mais tarde",

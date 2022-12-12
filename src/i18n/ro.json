@@ -51,6 +51,7 @@
   },
   "CONVERSATION": {
     "DEFAULT_HEADER_TITLE": "Conversații",
+    "UPDATING": "Updating...",
     "MINE": "Ale mele",
     "UN_ASSIGNED": "Neatribuit",
     "ALL": "Toate",
@@ -70,9 +71,14 @@
     "PRIVATE_MSG_INPUT": "Acest lucru va fi vizibil numai agenților",
     "UN_ASSIGN": "Anularea atribuirii conversației",
     "MUTE_CONVERSATION": "Silențios conversația",
-    "UNMUTE_CONVERSATION": "Sunet conversația"
+    "UNMUTE_CONVERSATION": "Sunet conversația",
+    "CONVERSATION_NOT_FOUND": "Could not fetch conversation"
   },
   "FILTER": {
+    "ALL_INBOXES": "All inboxes",
+    "FILTER_BY_ASSIGNEE_TYPE": "Filter by assignee type",
+    "FILTER_BY_CONVERSATION_STATUS": "Filter by conversation status",
+    "FILTER_BY_INBOX": "Filter by inbox",
     "HEADER_TITLE": "Filtru conversație",
     "CHOOSE_INBOX": "Alege Inboxul",
     "CHOOSE_STATUS": "Starea conversației",
@@ -120,17 +126,33 @@
     "CONVERSATION_ASSIGNED_NEW_MESSAGE_EMAIL": "Trimiterea notificărilor prin e-mail atunci când se creează un mesaj nou într-o conversație atribuită"
   },
   "CONVERSATION_DETAILS": {
+    "TITLE": "Informații despre conversație",
     "BROWSER": "Navigator",
     "OPERATING_SYSTEM": "Sistem de operare",
     "INITIATED_AT": "Iniţiat la",
     "INITIATED_FROM": "Inițiat de la",
     "IP_ADDRESS": "Adresă IP"
   },
+  "CONTACT_ATTRIBUTES": {
+    "TITLE": "Atribute Contacte"
+  },
   "CONVERSATION_ACTION": {
     "TITLE": "Acțiuni"
   },
+  "CONVERSATION_LABELS": {
+    "TITLE": "Etichete conversație",
+    "ADD_LABEL": "Adaugă etichete",
+    "EMPTY_LIST": "Please add labels to your account",
+    "NO_LABEL": "No labels assigned",
+    "UPDATE_LABEL": "Etichetă actualizată cu succes"
+  },
   "AGENT": {
     "TITLE": "Selectează agent"
+  },
+  "TEAMS": {
+    "TITLE": "Selectați echipa",
+    "EMPTY": "Please add teams to your account to assign conversations to teams.",
+    "CHANGE_TEAMS": "Echipa de conversație schimbată"
   },
   "ERRORS": {
     "COMMON_ERROR": "Nu s-a putut conecta la Woot Server, încercați din nou mai târziu",
